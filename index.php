@@ -125,6 +125,14 @@ $currency_formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);
 /////=====
 // $pdf->SetTextColor(255,255,255);
 
+$Address = "JL TERUSAN SOREANG CIPATIK NO. 11 KAB BANDUNG, JAWA BARAT";
+$telp = '0881-88888-92';
+$pdf -> SetY(12);
+$pdf -> SetX(48);
+$pdf->SetFont('Arial','',8);
+$pdf->MultiCell(50,3,$Address." / TELP: ".$telp,0,'L');
+$pdf->SetFont('Arial','',10);
+
 insert_cell($pdf,21.5,150,$Kode);
 insert_cell($pdf,21.5,182,$invoiceDate);
 insert_cell($pdf,47,180,$dueDate);
@@ -149,11 +157,12 @@ $sql = "SELECT * from penjualan WHERE id_faktur='{$invoiceNumber}'";
 $result = $pdo->query($sql);
 
 //$pdf->SetFont('Arial','',9);
-$x_axis = 33;
-$y_axis = 73;
-$count=0;
+$x_axis     = 33;
+$y_axis     = 73;
+$count      = 0;
 $subTotal   = 0;
 //$grandTotal = 0;
+
 while ($row = $result->fetch())
 {
     $count+=1;
@@ -232,10 +241,7 @@ while ($row = $result->fetch())
         $pdf->Image('source_template/template.jpg',0,0,235,0);
         $pdf->SetFont('Arial','',10);
         insert_cell($pdf,21.5,150,$Kode);
-
-        $pdf->SetFont('Arial','',8);
-        insert_cell($pdf,21.5,180,$invoiceDate);
-        $pdf->SetFont('Arial','',10);
+        insert_cell($pdf,21.5,182,$invoiceDate);
         insert_cell($pdf,47,180,$dueDate);
         insert_cell($pdf,31,180,$noPO);
         insert_cell($pdf,39,180,"NET ".$syarat);
